@@ -1,63 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 
-// Functional Component
-const Students = ({ data }) => {
-  const [students, setStudents] = useState(data);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-
-  //   Function to remove specific student
-  const removeStudent = (id) => {
-    console.log(`Student removed with id ${id}`);
-    const newStudents = students.filter((student) => student.id !== id);
-    setStudents(newStudents);
-  };
-
-  //   Function to handle form submission
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted");
-    setStudents([...students, { id: students.length + 1, name, age, email }]);
-    setName("");
-    setAge("");
-    setEmail("");
-  };
-
+const AddStudent = ({
+  name,
+  email,
+  age,
+  setName,
+  setEmail,
+  setAge,
+  submitHandler,
+}) => {
   return (
-    <div style={{ margin: "2px" }}>
-      <h2 style={{ textAlign: "center" }}>List of Students</h2>
-      <table
-        border="1"
-        style={{ width: "80%", margin: "2rem auto", textAlign: "center" }}
-      >
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Age</th>
-          <th>Button</th>
-        </tr>
-        {students.map((student) => {
-          return (
-            <tr key={student.id}>
-              <td style={{ textAlign: "left", padding: ".3rem 1rem" }}>
-                {student.name}
-              </td>
-              <td style={{ textAlign: "center" }}>{student.email}</td>
-              <td style={{ textAlign: "center" }}>{student.age}</td>
-              <td>
-                <button onClick={() => removeStudent(student.id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          );
-        })}
-      </table>
-      <hr></hr>
+    <div>
       <h2 style={{ textAlign: "center" }}>Add Student</h2>
       <form
-        onSubmit={submitHandler}
+        onSubmit={(e) => submitHandler(e, name, age, email)}
         style={{
           //   border: "2px solid black",
           width: "40%",
@@ -129,4 +85,4 @@ const Students = ({ data }) => {
   );
 };
 
-export default Students;
+export default AddStudent;

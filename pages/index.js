@@ -1,4 +1,4 @@
-import Students from "./students";
+import Students from "../components/students";
 
 const data = [
   {
